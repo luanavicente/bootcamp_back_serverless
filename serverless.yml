@@ -1,0 +1,32 @@
+service: serverless-todo-list
+plugins:
+  - serverless-offline
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  getTodos:
+    handler: src/handlers/todo.get
+    events:
+      - http:
+          path: todolist/
+          method: get
+  createTodo:
+    handler: src/handlers/todo.create
+    events:
+      - http:
+          path: todolist/
+          method: post
+  updateTodo:
+    handler: src/handlers/todo.update
+    events:
+      - http:
+          path: todolist/{_id}
+          method: patch
+  deleteTodo:
+    handler: src/handlers/todo.remove
+    events:
+      - http:
+          path: todolist/{_id}
+          method: delete
